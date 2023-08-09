@@ -1,5 +1,6 @@
 package com.techno.springbootdasar.controller
 
+import com.github.javafaker.Faker
 import com.techno.springbootdasar.domain.dto.request.ReqIdentitasDto
 import com.techno.springbootdasar.domain.dto.request.ReqOperationDto
 import com.techno.springbootdasar.domain.dto.response.ResBaseDto
@@ -7,6 +8,7 @@ import com.techno.springbootdasar.domain.dto.response.ResFullNameDto
 import com.techno.springbootdasar.domain.dto.response.ResIdentitasDto
 import com.techno.springbootdasar.domain.dto.response.ResOperationDto
 import com.techno.springbootdasar.service.LogicService
+import org.apache.coyote.Response
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -46,6 +48,24 @@ class TestController(
         return ResponseEntity.ok(response)
     }
 
+    @GetMapping("/random/name")
+    fun getNameRandom(@RequestParam("size") size : Int): ResponseEntity<ResBaseDto<ArrayList<ResBaseDto<ResFullNameDto>>>> {
+        val response : LinkedHashMap<String, String> = LinkedHashMap()
+        val data = ArrayList<ResBaseDto<ResFullNameDto>>()
+        val faker = Faker()
+        for(i in 1..size)
+        {
+            val first_name = faker.name().firstName().toString();
+            val last_name = faker.name().lastName().toString();
+            val age = faker.number().digit().toLong();
+
+            val fullName = logicService.fullName(ReqIdentitasDto(first_name, last_name, age));
+            data.add(fullName)
+        }
+        val responseBase = ResBaseDto(status = true, message = "success", data = data)
+        return ResponseEntity.ok().body(responseBase)
+    }
+
     @GetMapping("/get-age/{age}")
     fun getAgeByPath(@PathVariable("age") age : String): ResponseEntity<LinkedHashMap<String, String>> {
         val response : LinkedHashMap<String, String> = LinkedHashMap()
@@ -58,10 +78,10 @@ class TestController(
     @PostMapping("/get-identitas")
     fun getIdentitas(@RequestBody reqIdentitasDto: ReqIdentitasDto): ResponseEntity<ResBaseDto<ResIdentitasDto>> {
         log.info("Incoming request : $reqIdentitasDto")
-        val response : LinkedHashMap<String, String> = LinkedHashMap()
-        response["firstName"] = reqIdentitasDto.firstName.toString()
-        response["lastName"] = reqIdentitasDto.lastName.toString()
-        response["age"] = reqIdentitasDto.age.toString()
+//        val response : LinkedHashMap<String, String> = LinkedHashMap()
+//        response["firstName"] = reqIdentitasDto.firstName.toString()
+//        response["lastName"] = reqIdentitasDto.lastName.toString()
+//        response["age"] = reqIdentitasDto.age.toString()
 
         val responseBody = ResIdentitasDto(
             firstName = reqIdentitasDto.firstName,
