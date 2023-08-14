@@ -2,6 +2,7 @@ package com.techno.springbootdasar.service
 
 import com.techno.springbootdasar.domain.dto.request.ReqUserDto
 import com.techno.springbootdasar.domain.dto.response.ResBaseDto
+import com.techno.springbootdasar.domain.dto.response.ResExampleJwtDto
 import com.techno.springbootdasar.domain.dto.response.ResUserDto
 
 interface UserService {

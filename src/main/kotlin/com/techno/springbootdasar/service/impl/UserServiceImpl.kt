@@ -3,6 +3,7 @@ package com.techno.springbootdasar.service.impl
 import at.favre.lib.crypto.bcrypt.BCrypt
 import com.techno.springbootdasar.domain.dto.request.ReqUserDto
 import com.techno.springbootdasar.domain.dto.response.ResBaseDto
+import com.techno.springbootdasar.domain.dto.response.ResExampleJwtDto
 import com.techno.springbootdasar.domain.dto.response.ResMahasiswaDto
 import com.techno.springbootdasar.domain.dto.response.ResUserDto
 import com.techno.springbootdasar.domain.entity.UserEntity

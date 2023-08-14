@@ -13,10 +13,10 @@ data class UserEntity(
         @field:Column(name = "name", columnDefinition = "varchar(100)")
         val name: String? = null,
 
-        @field:Column(name = "username", columnDefinition = "varchar(100)")
+        @field:Column(name = "username", unique = true, columnDefinition = "varchar(100)")
         val username: String? = null,
 
-        @field:Column(name = "email", columnDefinition = "varchar(100)")
+        @field:Column(name = "email", unique = true, columnDefinition = "varchar(100)")
         val email: String? = null,
 
         @field:Column(name = "password", columnDefinition = "varchar(100)")

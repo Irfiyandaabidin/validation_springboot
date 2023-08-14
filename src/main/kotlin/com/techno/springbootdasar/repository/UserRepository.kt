@@ -7,6 +7,10 @@ import org.springframework.data.jpa.repository.Query
 
 interface UserRepository : JpaRepository<UserEntity, String> {
     fun findById(id: Long) : UserEntity?
+
+    fun findByUsernameAndPassword(username : String, password : String) : UserEntity?
+
+    fun findByUsername(username: String) : UserEntity?
     @Query(value = "DELETE UserEntity WHERE id = :id")
     fun deleteId(id: Long) : Int?
 }
