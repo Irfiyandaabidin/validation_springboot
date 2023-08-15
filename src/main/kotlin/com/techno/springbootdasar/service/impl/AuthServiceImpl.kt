@@ -33,7 +33,7 @@ class AuthServiceImpl (
         if(!passwordMatched.verified)
             throw CustomExceptionHandler("Username or password not match")
         println(passwordMatched)
-        val exp = System.currentTimeMillis()+3600000L
+        val exp = 300000L
         val expired = LocalDateTime.ofInstant(Instant.ofEpochMilli(exp), ZoneId.systemDefault())
         val token = JwtGenerator().createJWT(
                 reqExampleJwtDto.id.toString(),
